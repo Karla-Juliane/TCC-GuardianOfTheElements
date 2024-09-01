@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float moveX;
+    private BoxCollider2D colliderPlayer;
 
     public float speed;
     public int addJumps;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        colliderPlayer = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,14 @@ public class PlayerController : MonoBehaviour
     {
         moveX = Input.GetAxisRaw("Horizontal");
         textLife.text = life.ToString();
+        
+        if (life <= 0)
+        {
+            this.enabled = false;
+            colliderPlayer.enabled = false;
+            rb.gravityScale = 0;
+            GetComponent<SpriteRenderer>().color = Color.black;
+        }
     }
 
     private void FixedUpdate()
@@ -78,6 +88,10 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
+        if (collision.gameObject.tag == "Platform")
+        {
+            gameObject.transform.parent = collision.transform;
+        }
     }
     
     void OnCollisionExit2D(Collision2D collision)
@@ -85,6 +99,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground");
         {
             isGrounded = false;
+        }
+        if (collision.gameObject.tag == "Platform")
+        {
+            gameObject.transform.parent = null;
         }
     }
 }

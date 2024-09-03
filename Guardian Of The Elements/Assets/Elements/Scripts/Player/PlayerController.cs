@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public int life;
     public TextMeshProUGUI textLife;
+    public string levelName;
     
     
     // Start is called before the first frame update
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
             colliderPlayer.enabled = false;
             rb.gravityScale = 0;
             GetComponent<SpriteRenderer>().color = Color.black;
+            SceneManager.LoadScene(levelName);
         }
     }
 

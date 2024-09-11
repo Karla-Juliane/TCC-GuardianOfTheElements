@@ -18,11 +18,13 @@ public class PlayerController : MonoBehaviour
     public int life;
     public TextMeshProUGUI textLife;
     public string levelName;
-    
+
+    public Animator anim; 
     
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         colliderPlayer = GetComponent<BoxCollider2D>();
     }
@@ -83,6 +85,7 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        ParticleObserver.OnParticleSpawnEvent(transform.position);
     }
 
     public void Demage(int damage)
@@ -96,6 +99,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground");
         {
             isGrounded = true;
+            anim.SetBool("isGrounded",isGrounded);
         }
         if (collision.gameObject.tag == "Platform")
         {
@@ -108,6 +112,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground");
         {
             isGrounded = false;
+            anim.SetBool("isGrounded",isGrounded);
         }
         if (collision.gameObject.tag == "Platform")
         {

@@ -7,6 +7,10 @@ public class EspectroAttack : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       // collision.GetComponent<PlayerController>().life--;
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.GetComponent<PlayerController>().Demage(1);
+        }
+       
     }
 }

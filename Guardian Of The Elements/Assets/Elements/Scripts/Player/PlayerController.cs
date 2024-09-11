@@ -35,18 +35,8 @@ public class PlayerController : MonoBehaviour
         moveX = Input.GetAxisRaw("Horizontal");
         textLife.text = life.ToString();
         
-        if (life <= 0)
-        {
-            this.enabled = false;
-            colliderPlayer.enabled = false;
-            rb.gravityScale = 0;
-            GetComponent<SpriteRenderer>().color = Color.black;
-            SceneManager.LoadScene(levelName);
-        }
-    }
 
-    private void FixedUpdate()
-    {
+
         Move();
 
         if (isGrounded == true)
@@ -91,6 +81,17 @@ public class PlayerController : MonoBehaviour
     public void Demage(int damage)
     {
         life -= damage;
+        if (life <= 0)
+        {
+            this.enabled = false;
+            colliderPlayer.enabled = false;
+            rb.gravityScale = 0;
+           // GetComponent<SpriteRenderer>().color = Color.black;
+           //Mandar info que o jogador morreu para dentro do animator
+           
+           
+           GameManager.instance.CarregarDepoisDe(levelName,2);
+        }
     }
     
 

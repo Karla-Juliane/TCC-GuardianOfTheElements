@@ -7,6 +7,9 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    private bool porta;
+    private GameObject novaPorta;
+    
     private Rigidbody2D rb;
     private float moveX;
     private BoxCollider2D colliderPlayer;
@@ -24,6 +27,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        novaPorta = GameObject.Find("novaPorta");
+        
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         colliderPlayer = GetComponent<BoxCollider2D>();
@@ -32,6 +37,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        novaPosicao();
         moveX = Input.GetAxisRaw("Horizontal");
         textLife.text = life.ToString();
         
@@ -118,6 +124,23 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Platform")
         {
             gameObject.transform.parent = null;
+        }
+    }
+
+    private void novaPosicao()
+    {
+        if (porta == true)
+        {
+            rb.transform.position = new Vector2(novaPorta.transform.position.x, novaPorta.transform.position.y);
+            porta = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("next"))
+        {
+            porta = true;
         }
     }
 }

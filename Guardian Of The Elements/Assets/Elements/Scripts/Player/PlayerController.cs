@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 Jump();
+                AudioObserver.OnPlaySfxEvent("pulo");
             }
         }
         else
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
             {
                 addJumps--;
                 Jump();
+                AudioObserver.OnPlaySfxEvent("pulo");
             }
         }
     }

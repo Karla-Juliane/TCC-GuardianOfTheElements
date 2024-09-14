@@ -9,6 +9,8 @@ TagManager:
   - bala
   - next
   - Enemie
+  - Boss
+  - Magia
   layers:
   - Default
   - TransparentFX

@@ -144,5 +144,10 @@ public class PlayerController : MonoBehaviour
         {
             porta = true;
         }
+
+        if(col.gameObject.CompareTag("Enemie"))
+        {
+            Demage(1);
+        }
     }
 }

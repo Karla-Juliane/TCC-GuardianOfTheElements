@@ -19,7 +19,7 @@ public class BestaCorrompida : MonoBehaviour
     void Update()
     {
         distancia = Vector2.Distance(transform.position, playerPos.position);
-        if (distancia > 4)
+        if (distancia < 12)
         {
             Seguir();
         }

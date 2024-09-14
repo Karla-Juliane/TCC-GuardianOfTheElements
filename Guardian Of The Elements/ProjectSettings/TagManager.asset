@@ -8,6 +8,7 @@ TagManager:
   - Platform
   - bala
   - next
+  - Enemie
   layers:
   - Default
   - TransparentFX

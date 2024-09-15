@@ -153,5 +153,13 @@ public class PlayerController : MonoBehaviour
         if(col.gameObject.CompareTag("Magia")) {
             Demage(1);
         }
+        if(col.gameObject.CompareTag("serra"))
+        {
+            Demage(1);
+        }
+         if(col.gameObject.CompareTag("bloco"))
+         {
+            Demage(1);
+         }
     }
 }

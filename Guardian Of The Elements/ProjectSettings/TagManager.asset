@@ -11,6 +11,9 @@ TagManager:
   - Enemie
   - Boss
   - Magia
+  - bloco
+  - chao
+  - serra
   layers:
   - Default
   - TransparentFX

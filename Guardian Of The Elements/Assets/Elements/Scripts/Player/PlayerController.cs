@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     public string levelName;
 
     public Animator anim; 
+
+    public GameObject bolaTerraPrefab; // Prefab do ataque de terra
+    public Transform firePoint; // Ponto de onde o ataque será lançada
     
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
         novaPosicao();
         moveX = Input.GetAxisRaw("Horizontal");
         textLife.text = life.ToString();
+        Atacar();
         
 
 
@@ -161,5 +165,13 @@ public class PlayerController : MonoBehaviour
          {
             Demage(1);
          }
+    }
+
+    private void Atacar() 
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Instantiate(bolaTerraPrefab, firePoint.position, firePoint.rotation);
+        }
     }
 }

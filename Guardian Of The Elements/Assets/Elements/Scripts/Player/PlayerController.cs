@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float moveX;
     private BoxCollider2D colliderPlayer;
+    
+    private Scene currentScene;
 
     public float speed;
     public int addJumps;
@@ -25,11 +27,16 @@ public class PlayerController : MonoBehaviour
     public Animator anim; 
 
     public GameObject bolaTerraPrefab; // Prefab do ataque de terra
+    public GameObject bolaAguaPrefab;
+    public GameObject bolaVentoPrefab;
+    public GameObject bolaFogoPrefab;
+    
     public Transform firePoint; // Ponto de onde o ataque será lançada
     
     // Start is called before the first frame update
     void Start()
     {
+        currentScene = SceneManager.GetActiveScene();
         novaPorta = GameObject.Find("novaPorta");
         
         anim = GetComponent<Animator>();
@@ -172,6 +179,33 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             Instantiate(bolaTerraPrefab, firePoint.position, firePoint.rotation);
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            if(currentScene.buildIndex < 1)
+            {
+                return;
+            }
+            
+            Instantiate(bolaAguaPrefab, firePoint.position, firePoint.rotation);
+        }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if(currentScene.buildIndex < 2)
+            {
+                return;
+            }
+            
+            Instantiate(bolaVentoPrefab, firePoint.position, firePoint.rotation);
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            if(currentScene.buildIndex < 3)
+            {
+                return;
+            }
+            
+            Instantiate(bolaFogoPrefab, firePoint.position, firePoint.rotation);
         }
     }
 }

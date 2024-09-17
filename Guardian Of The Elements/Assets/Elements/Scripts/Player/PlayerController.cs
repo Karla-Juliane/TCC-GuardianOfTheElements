@@ -104,9 +104,12 @@ public class PlayerController : MonoBehaviour
         {
             this.enabled = false;
             colliderPlayer.enabled = false;
-            rb.gravityScale = 0;
+            rb.Sleep();
            // GetComponent<SpriteRenderer>().color = Color.black;
            //Mandar info que o jogador morreu para dentro do animator
+           anim.SetTrigger("die");
+           //Destroy(gameObject, 0.8f);
+           
            
            
            GameManager.instance.CarregarDepoisDe(levelName,2);
@@ -170,7 +173,7 @@ public class PlayerController : MonoBehaviour
         }
          if(col.gameObject.CompareTag("bloco"))
          {
-            Demage(1);
+            Demage(5);
          }
     }
 

@@ -718,11 +718,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3236183224325163841, guid: f671864e46698c54a8d3840eb52ce17b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.24
+      value: 15.65
       objectReference: {fileID: 0}
     - target: {fileID: 3236183224325163841, guid: f671864e46698c54a8d3840eb52ce17b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.83
+      value: -1.34
       objectReference: {fileID: 0}
     - target: {fileID: 3236183224325163841, guid: f671864e46698c54a8d3840eb52ce17b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8193,6 +8193,10 @@ PrefabInstance:
       propertyPath: textLife
       value: 
       objectReference: {fileID: 743546305}
+    - target: {fileID: 1400180435179400464, guid: e73c6748468eead4f861b35301c49b83, type: 3}
+      propertyPath: levelName
+      value: 2Agua
+      objectReference: {fileID: 0}
     - target: {fileID: 1400180435179400464, guid: e73c6748468eead4f861b35301c49b83, type: 3}
       propertyPath: bolaAguaPrefab
       value: 

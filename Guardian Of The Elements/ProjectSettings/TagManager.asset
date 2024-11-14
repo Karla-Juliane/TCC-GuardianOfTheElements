@@ -18,6 +18,7 @@ TagManager:
   - Bola_terra
   - Bola_fogo
   - Bola_vento
+  - armadilha
   layers:
   - Default
   - TransparentFX

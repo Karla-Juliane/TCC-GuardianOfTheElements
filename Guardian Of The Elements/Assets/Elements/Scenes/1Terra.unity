@@ -19318,6 +19318,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SerraDeFogo
       objectReference: {fileID: 0}
+    - target: {fileID: 383423957969290986, guid: 4bb7cc2792be0f546b44cc6e02a5422a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 383423957969290986, guid: 4bb7cc2792be0f546b44cc6e02a5422a, type: 3}
+      propertyPath: m_TagString
+      value: serra
+      objectReference: {fileID: 0}
     - target: {fileID: 6434095985985987075, guid: 4bb7cc2792be0f546b44cc6e02a5422a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32.7207

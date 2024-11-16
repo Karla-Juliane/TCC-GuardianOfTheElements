@@ -19,6 +19,7 @@ TagManager:
   - Bola_fogo
   - Bola_vento
   - armadilha
+  - pendulo
   layers:
   - Default
   - TransparentFX

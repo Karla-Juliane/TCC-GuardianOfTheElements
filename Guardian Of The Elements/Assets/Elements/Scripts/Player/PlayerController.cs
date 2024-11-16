@@ -171,10 +171,14 @@ public class PlayerController : MonoBehaviour
         {
             Demage(1);
         }
-        if(col.gameObject.CompareTag("armadilha"))
-          {
-           Demage(1);
-          }
+        if(col.gameObject.CompareTag("pendulo"))
+                {
+                    Demage(5);
+                }
+         if(col.gameObject.CompareTag("armadilha"))
+                        {
+                            Demage(1);
+                        }
          if(col.gameObject.CompareTag("bloco"))
          {
             Demage(5);

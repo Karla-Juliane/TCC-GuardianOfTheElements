@@ -80,22 +80,32 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
 
+        // Se o jogador está se movendo para a direita
         if (moveX > 0)
         {
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            anim.SetInteger("transition", 1);;
         }
-
-        if (moveX < 0)
+        // Se o jogador está se movendo para a esquerda
+        else if (moveX < 0)
         {
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
+            anim.SetInteger("transition", 1);;
+        }
+        // Se o jogador não está se movendo
+        else if (isGrounded)
+        {
+            anim.SetInteger("transition", 0);; // Para a animação de corrida
         }
     }
 
     void Jump()
     {
+        anim.SetTrigger("jump");  // Define o trigger para pulo
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         ParticleObserver.OnParticleSpawnEvent(transform.position);
     }
+
 
     public void Demage(int damage)
     {
@@ -119,16 +129,13 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground");
+        if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
-            anim.SetBool("isGrounded",isGrounded);
-        }
-        if (collision.gameObject.tag == "Platform")
-        {
-            gameObject.transform.parent = collision.transform;
+            anim.SetBool("isGrounded", isGrounded);
         }
     }
+
     
     void OnCollisionExit2D(Collision2D collision)
     {

@@ -799,7 +799,7 @@ PrefabInstance:
     - target: {fileID: 3421144845347270513, guid: f671864e46698c54a8d3840eb52ce17b, type: 3}
       propertyPath: playerPos
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 920116283}
     - target: {fileID: 4008842862539410037, guid: f671864e46698c54a8d3840eb52ce17b, type: 3}
       propertyPath: m_Radius
       value: 0.88910353
@@ -1231,6 +1231,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743546303}
   m_CullTransparentMesh: 1
+--- !u!4 &920116283 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8130852367202334372, guid: c496a73d437a98c4c8e574b5e74fd31c, type: 3}
+  m_PrefabInstance: {fileID: 309591401}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &941694977
 GameObject:
   m_ObjectHideFlags: 0
@@ -3651,7 +3656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2e015f97b5e0344ae47d5e0319dfce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 920116283}
   minX: 1.03
   maxX: 47.11
   timeLerp: 0.05

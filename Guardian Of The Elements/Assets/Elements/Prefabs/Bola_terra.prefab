@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1289567325732253374}
   - component: {fileID: 3244930452090497846}
   - component: {fileID: 6758424193916334061}
+  - component: {fileID: 461232298037481451}
   m_Layer: 7
   m_Name: Bola_terra
   m_TagString: Bola_terra
@@ -145,3 +146,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidade: 5
   tempoDeVida: 2
+--- !u!50 &461232298037481451
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3267487030705265230}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6

@@ -1851,7 +1851,7 @@ GameObject:
   - component: {fileID: 470604625}
   - component: {fileID: 470604620}
   - component: {fileID: 470604619}
-  - component: {fileID: 470604626}
+  - component: {fileID: 470604628}
   - component: {fileID: 470604627}
   m_Layer: 0
   m_Name: besta
@@ -2024,22 +2024,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkTime: 2
   damage: 1
---- !u!114 &470604626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 470604618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e8d5997e2673b4478af1fd113031351, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  life: 3
-  isDead: 0
-  walkTime: 2
 --- !u!61 &470604627
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2085,6 +2069,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.598049, y: 2.2052214}
   m_EdgeRadius: 0
+--- !u!114 &470604628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470604618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77866765472bc74f86f552a0d6948d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  life: 3
+  isDead: 0
+  walkTime: 2
+  attackRange: 4
+  player: {fileID: 6043058708332731473}
 --- !u!1 &479798413
 GameObject:
   m_ObjectHideFlags: 0

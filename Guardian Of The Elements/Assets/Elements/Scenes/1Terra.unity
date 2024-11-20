@@ -1847,11 +1847,11 @@ GameObject:
   m_Component:
   - component: {fileID: 470604624}
   - component: {fileID: 470604623}
+  - component: {fileID: 470604628}
   - component: {fileID: 470604621}
   - component: {fileID: 470604625}
   - component: {fileID: 470604620}
   - component: {fileID: 470604619}
-  - component: {fileID: 470604628}
   - component: {fileID: 470604627}
   m_Layer: 0
   m_Name: besta
@@ -2005,7 +2005,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.63, y: -2.65, z: 0}
-  m_LocalScale: {x: 0.5227, y: 0.5227, z: 0.5227}
+  m_LocalScale: {x: 0.86644286, y: 0.86644286, z: 0.86644286}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2023,7 +2023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkTime: 2
-  damage: 1
+  damage: 5
 --- !u!61 &470604627
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2084,8 +2084,8 @@ MonoBehaviour:
   speed: 2
   life: 3
   isDead: 0
-  walkTime: 2
-  attackRange: 4
+  walkTime: 1
+  attackRange: 1.5
   player: {fileID: 6043058708332731473}
 --- !u!1 &479798413
 GameObject:

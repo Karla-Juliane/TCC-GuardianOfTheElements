@@ -4,18 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
-{
-    public Transform player;
-    public float minX, maxX;
-    public float timeLerp;
 
-    private void FixedUpdate()
+{
+    private Transform player;
+    public float smooth;
+    // Start is called before the first frame update
+    void Start()
     {
-        Vector3 newPosition = player.position + new Vector3(0, 0, -10);
-        newPosition.y = 0.1f;
-        newPosition = Vector3.Lerp(transform.position, newPosition, timeLerp);
-        transform.position = newPosition;
-        
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), transform.position.y, transform.position.z);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        if (player.position.x >= -20 && player.position.x < 200)
+        {
+            Vector3 following = new Vector3(player.position.x, player.position.y, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, following, smooth * Time.deltaTime);
+        }
     }
 }

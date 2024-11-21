@@ -33,11 +33,16 @@ public class PlayerController : MonoBehaviour
     
     public Transform firePoint; // Ponto de onde o ataque será lançada
     
+    private bool isKnockedBack = false; // Controla se o jogador está em knockback
+    private float knockbackDuration = 0.5f; // Duração do knockback
+        
     // Start is called before the first frame update
     void Start()
     {
         currentScene = SceneManager.GetActiveScene();
         novaPorta = GameObject.Find("novaPorta");
+        
+        levelName = SceneManager.GetActiveScene().name;
         
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -78,6 +83,8 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
+        if (isKnockedBack) return; // Ignora a movimentação durante o knockback
+        
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
 
         // Se o jogador está se movendo para a direita
@@ -120,9 +127,10 @@ public class PlayerController : MonoBehaviour
            anim.SetTrigger("die");
            //Destroy(gameObject, 0.8f);
            
-           
-           
-           GameManager.instance.CarregarDepoisDe(levelName,2);
+           if (GameManager.instance != null)
+           {
+               GameManager.instance.CarregarDepoisDe(levelName,2.0f);
+           }
         }
     }
     
@@ -225,5 +233,21 @@ public class PlayerController : MonoBehaviour
             
             Instantiate(bolaFogoPrefab, firePoint.position, firePoint.rotation);
         }
+    }
+    
+    public void ApplyKnockback(Vector2 force)
+    {
+        if (isKnockedBack) return; // Evita múltiplos knockbacks
+    
+        isKnockedBack = true;
+        rb.velocity = Vector2.zero; // Reseta qualquer movimento atual
+        rb.AddForce(force, ForceMode2D.Impulse); // Aplica a força de knockback
+    
+        Invoke(nameof(ResetKnockback), knockbackDuration); // Reseta o knockback após a duração
+    }
+    
+    private void ResetKnockback()
+    {
+        isKnockedBack = false;
     }
 }

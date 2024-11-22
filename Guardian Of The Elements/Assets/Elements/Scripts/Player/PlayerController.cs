@@ -31,7 +31,12 @@ public class PlayerController : MonoBehaviour
     public GameObject bolaVentoPrefab;
     public GameObject bolaFogoPrefab;
     
+    public bool isAttacking = false;
+    
     public Transform firePoint; // Ponto de onde o ataque será lançada
+    public Transform bolaAguaPoint; // Ponto de onde o ataque de agua será lançado
+    public Transform bolaVentoPoint;
+    public Transform bolaFogoPoint;
     
     private bool isKnockedBack = false; // Controla se o jogador está em knockback
     private float knockbackDuration = 0.5f; // Duração do knockback
@@ -100,7 +105,7 @@ public class PlayerController : MonoBehaviour
             anim.SetInteger("transition", 1);;
         }
         // Se o jogador não está se movendo
-        else if (isGrounded)
+        else if (isGrounded && !isAttacking)
         {
             anim.SetInteger("transition", 0);; // Para a animação de corrida
         }
@@ -119,12 +124,13 @@ public class PlayerController : MonoBehaviour
         life -= damage;
         if (life <= 0)
         {
+            anim.SetInteger("transition", 6);
             this.enabled = false;
-            colliderPlayer.enabled = false;
+            //colliderPlayer.enabled = false;
             rb.Sleep();
            // GetComponent<SpriteRenderer>().color = Color.black;
            //Mandar info que o jogador morreu para dentro do animator
-           anim.SetTrigger("die");
+           //anim.SetTrigger("die");
            //Destroy(gameObject, 0.8f);
            
            if (GameManager.instance != null)
@@ -199,39 +205,73 @@ public class PlayerController : MonoBehaviour
             Demage(5);
          }
     }
+    
+    private IEnumerator ResetIsAttacking()
+    {
+        yield return new WaitForSeconds(1f); // Espera 1 segundo
+        isAttacking = false;
+    }
+    
+    public void LaunchBolaTerra()
+    {
+        Instantiate(bolaTerraPrefab, firePoint.position, firePoint.rotation);
+    }
+    
+    public void LaunchBolaAgua()
+    {
+        Instantiate(bolaAguaPrefab, bolaAguaPoint.position, bolaAguaPoint.rotation);
+    }
+    
+    public void LaunchBolaVento()
+    {
+        Instantiate(bolaVentoPrefab, bolaVentoPoint.position, bolaVentoPoint.rotation);
+    }
+    
+    public void LaunchBolaFogo()
+        {
+            Instantiate(bolaFogoPrefab, bolaFogoPoint.position, bolaFogoPoint.rotation);
+        }
 
     private void Atacar() 
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            Instantiate(bolaTerraPrefab, firePoint.position, firePoint.rotation);
+           isAttacking = true;
+           anim.SetInteger("transition", 2); // Inicia a animação
+           StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
         }
         else if (Input.GetKeyDown(KeyCode.C))
-        {
-            if(currentScene.buildIndex < 1)
-            {
-                return;
-            }
-            
-            Instantiate(bolaAguaPrefab, firePoint.position, firePoint.rotation);
-        }
-        else if (Input.GetKeyDown(KeyCode.Z))
-        {
-            if(currentScene.buildIndex < 2)
-            {
-                return;
-            }
-            
-            Instantiate(bolaVentoPrefab, firePoint.position, firePoint.rotation);
-        }
-        else if (Input.GetKeyDown(KeyCode.X))
         {
             if(currentScene.buildIndex < 3)
             {
                 return;
             }
             
-            Instantiate(bolaFogoPrefab, firePoint.position, firePoint.rotation);
+           isAttacking = true;
+           anim.SetInteger("transition", 3); // Inicia a animação
+           StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
+        }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if(currentScene.buildIndex < 4)
+            {
+                return;
+            }
+            
+           isAttacking = true;
+           anim.SetInteger("transition", 4); // Inicia a animação
+           StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            if(currentScene.buildIndex < 5)
+            {
+                return;
+            }
+            
+          isAttacking = true;
+          anim.SetInteger("transition", 5); // Inicia a animação
+          StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
         }
     }
     

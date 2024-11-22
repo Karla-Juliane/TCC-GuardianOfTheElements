@@ -57,7 +57,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameOverObj.SetActive(true);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+        Debug.Log("Game Over ativado!");
     }
 
     public void RestartGame()

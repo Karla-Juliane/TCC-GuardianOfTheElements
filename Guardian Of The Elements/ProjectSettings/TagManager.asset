@@ -20,6 +20,8 @@ TagManager:
   - Bola_vento
   - armadilha
   - pendulo
+  - Interactable
+  - Particulas
   layers:
   - Default
   - TransparentFX

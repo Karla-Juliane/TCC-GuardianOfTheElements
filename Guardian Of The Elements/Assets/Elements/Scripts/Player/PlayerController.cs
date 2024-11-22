@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D colliderPlayer;
     
     private Scene currentScene;
+    
+    
 
     public float speed;
     public int addJumps;
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviour
     public GameObject bolaAguaPrefab;
     public GameObject bolaVentoPrefab;
     public GameObject bolaFogoPrefab;
+    public bool withParticle;
+    public GameObject dialogueObj;
     
     public bool isAttacking = false;
     
@@ -83,6 +87,15 @@ public class PlayerController : MonoBehaviour
                 Jump();
                 AudioObserver.OnPlaySfxEvent("pulo");
             }
+        }
+        if (withParticle == true)
+        {
+            dialogueObj.SetActive(true);
+        }
+
+        else if (withParticle == false)
+        {
+            dialogueObj.SetActive(false);
         }
     }
 
@@ -295,5 +308,23 @@ public class PlayerController : MonoBehaviour
     private void ResetKnockback()
     {
         isKnockedBack = false;
+    }
+    
+    void OnTriggerStay2D(Collider2D other){
+        if(other.gameObject.CompareTag("Particulas"))
+        {
+            Debug.Log("TA AQ");
+            withParticle = true;
+            dialogueObj.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other){
+        if(other.gameObject.CompareTag("Particulas"))
+        {
+            Debug.Log("saiu");
+            withParticle = false;
+            dialogueObj.SetActive(false);
+        }
     }
 }

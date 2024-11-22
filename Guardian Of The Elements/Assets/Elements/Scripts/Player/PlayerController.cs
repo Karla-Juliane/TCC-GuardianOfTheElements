@@ -140,6 +140,11 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    public void RestartLevel(string levelName) 
+    {
+        GameManager.instance.CarregarDepoisDe(levelName, 0.1f);
+    }
+    
 
     void OnCollisionEnter2D(Collision2D collision)
     {

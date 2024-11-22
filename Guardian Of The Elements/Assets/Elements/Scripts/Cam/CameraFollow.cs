@@ -6,21 +6,24 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 
 {
+   
     private Transform player;
-    public float smooth;
-    // Start is called before the first frame update
+    public float smooth = 0.125f;
+    public float heightOffset = 2f; // Offset da altura ajustável
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         if (player.position.x >= -20 && player.position.x < 200)
         {
-            Vector3 following = new Vector3(player.position.x, player.position.y, transform.position.z);
-            transform.position = Vector3.Lerp(transform.position, following, smooth * Time.deltaTime);
+            // Adiciona o offset de altura
+            Vector3 targetPosition = new Vector3(player.position.x, player.position.y + heightOffset, transform.position.z);
+            // Movimento suave da câmera
+            transform.position = Vector3.Lerp(transform.position, targetPosition, smooth * Time.deltaTime);
         }
     }
 }

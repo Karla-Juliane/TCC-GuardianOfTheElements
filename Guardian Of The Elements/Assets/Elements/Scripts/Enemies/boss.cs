@@ -102,6 +102,20 @@ public class boss : MonoBehaviour
  
      private void OnTriggerEnter2D(Collider2D col)
      {
+         if (col.gameObject.CompareTag("Player"))
+        {
+            PlayerController player = col.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                Vector2 knockbackDirection = (col.transform.position - transform.position).normalized;
+                float knockbackForce = 20f; // Ajuste conforme necessário
+                Vector2 knockback = knockbackDirection * knockbackForce;
+                
+                player.ApplyKnockback(knockback);
+                Debug.Log("Knockback aplicado ao jogador!");
+            }
+        }
+         
          if (col.gameObject.CompareTag("Bola_terra") ||
              col.gameObject.CompareTag("Bola_fogo") ||
              col.gameObject.CompareTag("Bola_agua") ||

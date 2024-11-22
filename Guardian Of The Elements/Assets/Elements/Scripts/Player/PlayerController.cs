@@ -128,6 +128,7 @@ public class PlayerController : MonoBehaviour
             this.enabled = false;
             //colliderPlayer.enabled = false;
             rb.Sleep();
+            
            // GetComponent<SpriteRenderer>().color = Color.black;
            //Mandar info que o jogador morreu para dentro do animator
            //anim.SetTrigger("die");
@@ -135,7 +136,7 @@ public class PlayerController : MonoBehaviour
            
            if (GameManager.instance != null)
            {
-               GameManager.instance.CarregarDepoisDe(levelName,2.0f);
+               GameManager.instance.GameOver();
            }
         }
     }

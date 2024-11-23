@@ -18,7 +18,7 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate()
     {
-        if (player.position.x >= -20 && player.position.x < 200)
+        if (player.position.x >= -20 && player.position.x < 345)
         {
             // Adiciona o offset de altura
             Vector3 targetPosition = new Vector3(player.position.x, player.position.y + heightOffset, transform.position.z);

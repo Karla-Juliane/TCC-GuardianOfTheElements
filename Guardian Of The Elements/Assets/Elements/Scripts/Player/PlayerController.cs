@@ -153,27 +153,24 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.CarregarDepoisDe(levelName, 0.1f);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Platform"))
         {
             isGrounded = true;
             anim.SetBool("isGrounded", isGrounded);
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground");
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Platform"))
         {
             isGrounded = false;
             anim.SetBool("isGrounded", isGrounded);
         }
-        if (collision.gameObject.tag == "Platform")
-        {
-            gameObject.transform.parent = null;
-        }
     }
+
 
     private void novaPosicao()
     {

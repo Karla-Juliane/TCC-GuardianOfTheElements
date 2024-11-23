@@ -7,9 +7,11 @@ public class FallingPlatform : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
 
-    public float fallDelay = 2f; // Tempo até a plataforma começar a cair
-    public float respawnDelay = 3f; // Tempo para a plataforma reaparecer
+    public float fallDelay = 0.5f; // Tempo até a plataforma começar a cair
+    public float respawnDelay = 1f; // Tempo para a plataforma reaparecer
     private Vector2 initialPosition; // Posição inicial da plataforma
+
+    private bool isPlayerOnPlatform = false; // Verifica se o jogador está sobre a plataforma
 
     private void Start()
     {
@@ -20,13 +22,24 @@ public class FallingPlatform : MonoBehaviour
         initialPosition = transform.position; // Salva a posição inicial
     }
 
+    private void Update()
+    {
+        // Evita que o jogador "grude" na plataforma ao cair
+        if (rb.bodyType == RigidbodyType2D.Dynamic && isPlayerOnPlatform)
+        {
+            // Libera o jogador caso a plataforma esteja caindo
+            Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+            player.parent = null;
+            isPlayerOnPlatform = false;
+        }
+    }
+
     private IEnumerator FallAndRespawn()
     {
         // Aguarda antes de começar a cair
         yield return new WaitForSeconds(fallDelay);
 
-        // Torna o Rigidbody dinâmico para começar a cair
-        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.bodyType = RigidbodyType2D.Dynamic; // Torna a plataforma dinâmica para cair
 
         // Aguarda para a queda ocorrer
         yield return new WaitForSeconds(1f);
@@ -47,19 +60,20 @@ public class FallingPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Verifica se o jogador está sobre a plataforma
         if (collision.gameObject.CompareTag("Player"))
         {
+            isPlayerOnPlatform = true;
+            collision.transform.parent = transform; // Define o jogador como filho da plataforma
             StartCoroutine(FallAndRespawn());
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        // Desvincula o jogador da plataforma
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.parent = null;
+            isPlayerOnPlatform = false;
+            collision.transform.parent = null; // Remove o jogador como filho da plataforma
         }
     }
 }

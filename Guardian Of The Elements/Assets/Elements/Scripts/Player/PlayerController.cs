@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-   private bool porta;
+    private bool porta;
     private GameObject novaPorta;
 
     private Rigidbody2D rb;
@@ -15,6 +16,11 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D colliderPlayer;
 
     private Scene currentScene;
+    
+    public Slider healthSlider;  // Referência ao Slider da vida
+    public int life = 100;       // Vida do jogador
+    public int maxHealth = 100;  // Vida máxima do jogador
+    public TextMeshProUGUI textLife;  // Referência para o texto da vida
 
     public float speed;
     public int addJumps;
@@ -42,6 +48,10 @@ public class PlayerController : MonoBehaviour
 
     private bool isKnockedBack = false; // Controla se o jogador está em knockback
     private float knockbackDuration = 0.5f; // Duração do knockback
+
+    private Transform currentPlatform; // A plataforma atual que o jogador está em
+    private Vector2 platformVelocity; // A velocidade da plataforma
+    private bool isOnPlatform = false; // Flag para verificar se está em uma plataforma
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +94,7 @@ public class PlayerController : MonoBehaviour
                 AudioObserver.OnPlaySfxEvent("pulo");
             }
         }
+
         if (withParticle == true)
         {
             dialogueObj.SetActive(true);
@@ -94,11 +105,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        // Se o jogador estiver sobre uma plataforma
+        if (isOnPlatform)
+        {
+            // Obtém a velocidade da plataforma
+            platformVelocity = currentPlatform.GetComponent<Rigidbody2D>().velocity;
+
+            // Aplica o movimento horizontal do jogador + a velocidade da plataforma
+            rb.velocity = new Vector2(moveX * speed + platformVelocity.x, rb.velocity.y);
+        }
+        else
+        {
+            // Se não estiver sobre uma plataforma, o jogador se move normalmente
+            rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
+        }
+    }
+
     void Move()
     {
         if (isKnockedBack) return; // Ignora a movimentação durante o knockback
-
-        rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
 
         // Se o jogador está se movendo para a direita
         if (moveX > 0)
@@ -133,14 +160,7 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetInteger("transition", 6);
             this.enabled = false;
-            //colliderPlayer.enabled = false;
             rb.Sleep();
-            
-            // GetComponent<SpriteRenderer>().color = Color.black;
-            //Mandar info que o jogador morreu para dentro do animator
-            //anim.SetTrigger("die");
-            //Destroy(gameObject, 0.8f);
-
             if (GameManager.instance != null)
             {
                 GameManager.instance.GameOver();
@@ -153,21 +173,34 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.CarregarDepoisDe(levelName, 0.1f);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Platform"))
         {
             isGrounded = true;
             anim.SetBool("isGrounded", isGrounded);
+
+            // Se o jogador está em cima de uma plataforma, ele vai seguir seu movimento
+            if (collision.gameObject.CompareTag("Platform"))
+            {
+                // O movimento do jogador será seguido pela plataforma por meio do SetParent
+                transform.SetParent(collision.transform);
+            }
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Platform"))
         {
             isGrounded = false;
             anim.SetBool("isGrounded", isGrounded);
+
+            // Quando o jogador sair da plataforma, ele não segue mais o movimento da plataforma
+            if (collision.gameObject.CompareTag("Platform"))
+            {
+                transform.SetParent(null);
+            }
         }
     }
 
@@ -326,5 +359,4 @@ public class PlayerController : MonoBehaviour
             withParticle = false;
         }
     }
-    
 }

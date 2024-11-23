@@ -218,15 +218,15 @@ RectTransform:
   m_GameObject: {fileID: 473120039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.9241614, y: 2.9241614, z: 2.9241614}
+  m_LocalScale: {x: 2.1487615, y: 2.1487615, z: 2.1487615}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1076966457}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.4143, y: -9.8762}
-  m_SizeDelta: {x: 386.6114, y: 214.7549}
+  m_AnchoredPosition: {x: 7.426, y: -7.9428}
+  m_SizeDelta: {x: 394.839, y: 216.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &473120041
 MonoBehaviour:
@@ -300,8 +300,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.7, y: 119.7}
-  m_SizeDelta: {x: 323.7145, y: 85.6056}
+  m_AnchoredPosition: {x: 3.934, y: 165}
+  m_SizeDelta: {x: 1541.469, y: 85.606}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &889958585
 MonoBehaviour:
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 97690656
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 5
+  m_fontStyle: 3
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 40.586243, y: 0, z: 35.55991, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -552,15 +552,16 @@ MonoBehaviour:
     fugir ou lutar pelo equil\xEDbrio de Naturia.\""
   fundoCutscene: {fileID: 473120041}
   fundos:
-  - {fileID: 21300000, guid: fe8dd235fc63fee47ab21c384c0faf79, type: 3}
-  - {fileID: 21300000, guid: fe8dd235fc63fee47ab21c384c0faf79, type: 3}
-  - {fileID: 21300000, guid: 3de5197a916d2604fbebf1acdcf65508, type: 3}
-  - {fileID: 21300000, guid: 0b93e49f4b1c59846a9e336183b1f05b, type: 3}
-  - {fileID: 21300000, guid: 0b93e49f4b1c59846a9e336183b1f05b, type: 3}
-  - {fileID: 21300000, guid: 0b93e49f4b1c59846a9e336183b1f05b, type: 3}
-  - {fileID: 21300000, guid: bb91413b928b1a34a84f1f7dbe29a837, type: 3}
-  - {fileID: 21300000, guid: bb91413b928b1a34a84f1f7dbe29a837, type: 3}
-  - {fileID: 21300000, guid: bb91413b928b1a34a84f1f7dbe29a837, type: 3}
+  - {fileID: 21300000, guid: 370a7476238df004b88e9146f741b70d, type: 3}
+  - {fileID: 21300000, guid: 2006ef5ff8f662d44ae1486ef5c79c34, type: 3}
+  - {fileID: 21300000, guid: 9b49bfdf11bf0044085f345491ddfc34, type: 3}
+  - {fileID: 21300000, guid: cb8e84dadc70cdc4497e7d40792cc707, type: 3}
+  - {fileID: 21300000, guid: cb8e84dadc70cdc4497e7d40792cc707, type: 3}
+  - {fileID: 21300000, guid: cb8e84dadc70cdc4497e7d40792cc707, type: 3}
+  - {fileID: 21300000, guid: cb8e84dadc70cdc4497e7d40792cc707, type: 3}
+  - {fileID: 21300000, guid: cb8e84dadc70cdc4497e7d40792cc707, type: 3}
+  - {fileID: 21300000, guid: cb8e84dadc70cdc4497e7d40792cc707, type: 3}
+  nomeCenaProxima: 1Terra
 --- !u!4 &1688564602
 Transform:
   m_ObjectHideFlags: 0

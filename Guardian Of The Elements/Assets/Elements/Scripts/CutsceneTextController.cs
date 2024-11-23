@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CutsceneTextController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class CutsceneTextController : MonoBehaviour
     public Sprite[] fundos; // Array de sprites para os fundos
 
     private int indexFrase = 0; // Índice da frase atual
+    public string nomeCenaProxima = "NomeDaProximaCena"; // Nome da cena a carregar
 
     private void Start()
     {
@@ -36,7 +38,7 @@ public class CutsceneTextController : MonoBehaviour
             yield return new WaitForSeconds(tempoPorLetra); // Aguarda o tempo antes de mostrar a próxima letra
         }
 
-        yield return new WaitForSeconds(1f); // Pausa antes de avançar para a próxima frase
+        yield return new WaitForSeconds(0.2f); // Tempo reduzido entre frases
 
         // Troca o fundo, se houver mais fundos disponíveis
         if (indexFrase < fundos.Length - 1)
@@ -52,8 +54,24 @@ public class CutsceneTextController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Fim da cutscene de texto.");
+            Debug.Log("Finalizando cutscene e trocando de cena...");
+            TrocarCena(); // Chama imediatamente ao final da última frase
+        }
+    }
+
+    private void TrocarCena()
+    {
+        StartCoroutine(CarregarCenaAssincronamente());
+    }
+
+    IEnumerator CarregarCenaAssincronamente()
+    {
+        AsyncOperation operacao = SceneManager.LoadSceneAsync(nomeCenaProxima);
+
+        // Opcional: esperar o carregamento
+        while (!operacao.isDone)
+        {
+            yield return null; // Aguarda o próximo frame
         }
     }
 }
-

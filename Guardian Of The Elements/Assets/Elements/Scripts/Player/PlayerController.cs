@@ -7,16 +7,14 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    private bool porta;
+   private bool porta;
     private GameObject novaPorta;
-    
+
     private Rigidbody2D rb;
     private float moveX;
     private BoxCollider2D colliderPlayer;
-    
+
     private Scene currentScene;
-    
-    
 
     public float speed;
     public int addJumps;
@@ -26,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI textLife;
     public string levelName;
 
-    public Animator anim; 
+    public Animator anim;
 
     public GameObject bolaTerraPrefab; // Prefab do ataque de terra
     public GameObject bolaAguaPrefab;
@@ -34,25 +32,25 @@ public class PlayerController : MonoBehaviour
     public GameObject bolaFogoPrefab;
     public bool withParticle;
     public GameObject dialogueObj;
-    
+
     public bool isAttacking = false;
-    
+
     public Transform firePoint; // Ponto de onde o ataque será lançada
     public Transform bolaAguaPoint; // Ponto de onde o ataque de agua será lançado
     public Transform bolaVentoPoint;
     public Transform bolaFogoPoint;
-    
+
     private bool isKnockedBack = false; // Controla se o jogador está em knockback
     private float knockbackDuration = 0.5f; // Duração do knockback
-        
+
     // Start is called before the first frame update
     void Start()
     {
         currentScene = SceneManager.GetActiveScene();
         novaPorta = GameObject.Find("novaPorta");
-        
+
         levelName = SceneManager.GetActiveScene().name;
-        
+
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         colliderPlayer = GetComponent<BoxCollider2D>();
@@ -65,8 +63,6 @@ public class PlayerController : MonoBehaviour
         moveX = Input.GetAxisRaw("Horizontal");
         textLife.text = life.ToString();
         Atacar();
-        
-
 
         Move();
 
@@ -92,7 +88,6 @@ public class PlayerController : MonoBehaviour
         {
             dialogueObj.SetActive(true);
         }
-
         else if (withParticle == false)
         {
             dialogueObj.SetActive(false);
@@ -102,7 +97,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         if (isKnockedBack) return; // Ignora a movimentação durante o knockback
-        
+
         rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
 
         // Se o jogador está se movendo para a direita
@@ -131,7 +126,6 @@ public class PlayerController : MonoBehaviour
         ParticleObserver.OnParticleSpawnEvent(transform.position);
     }
 
-
     public void Demage(int damage)
     {
         life -= damage;
@@ -142,23 +136,22 @@ public class PlayerController : MonoBehaviour
             //colliderPlayer.enabled = false;
             rb.Sleep();
             
-           // GetComponent<SpriteRenderer>().color = Color.black;
-           //Mandar info que o jogador morreu para dentro do animator
-           //anim.SetTrigger("die");
-           //Destroy(gameObject, 0.8f);
-           
-           if (GameManager.instance != null)
-           {
-               GameManager.instance.GameOver();
-           }
+            // GetComponent<SpriteRenderer>().color = Color.black;
+            //Mandar info que o jogador morreu para dentro do animator
+            //anim.SetTrigger("die");
+            //Destroy(gameObject, 0.8f);
+
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.GameOver();
+            }
         }
     }
-    
-    public void RestartLevel(string levelName) 
+
+    public void RestartLevel(string levelName)
     {
         GameManager.instance.CarregarDepoisDe(levelName, 0.1f);
     }
-    
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -169,13 +162,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground");
         {
             isGrounded = false;
-            anim.SetBool("isGrounded",isGrounded);
+            anim.SetBool("isGrounded", isGrounded);
         }
         if (collision.gameObject.tag == "Platform")
         {
@@ -199,119 +191,129 @@ public class PlayerController : MonoBehaviour
             porta = true;
         }
 
-        if(col.gameObject.CompareTag("Enemie"))
+        if (col.gameObject.CompareTag("Enemie"))
         {
             Demage(1);
         }
 
-        if(col.gameObject.CompareTag("Magia")) {
-            Demage(1);
-        }
-        if(col.gameObject.CompareTag("serra"))
+        if (col.gameObject.CompareTag("Magia"))
         {
             Demage(1);
         }
-        if(col.gameObject.CompareTag("pendulo"))
-                {
-                    Demage(5);
-                }
-         if(col.gameObject.CompareTag("armadilha"))
-                        {
-                            Demage(1);
-                        }
-         if(col.gameObject.CompareTag("bloco"))
-         {
+
+        // Se o jogador colidir com a bala
+        if (col.gameObject.CompareTag("Bullet"))
+        {
+            Demage(1); // Aplica 1 de dano (ou o dano configurado na bala)
+            Destroy(col.gameObject); // Destrói a bala após a colisão
+        }
+
+        if (col.gameObject.CompareTag("serra"))
+        {
+            Demage(1);
+        }
+        if (col.gameObject.CompareTag("pendulo"))
+        {
             Demage(5);
-         }
+        }
+        if (col.gameObject.CompareTag("armadilha"))
+        {
+            Demage(1);
+        }
+        if (col.gameObject.CompareTag("bloco"))
+        {
+            Demage(5);
+        }
     }
-    
+
     private IEnumerator ResetIsAttacking()
     {
         yield return new WaitForSeconds(1f); // Espera 1 segundo
         isAttacking = false;
     }
-    
+
     public void LaunchBolaTerra()
     {
         Instantiate(bolaTerraPrefab, firePoint.position, firePoint.rotation);
     }
-    
+
     public void LaunchBolaAgua()
     {
         Instantiate(bolaAguaPrefab, bolaAguaPoint.position, bolaAguaPoint.rotation);
     }
-    
+
     public void LaunchBolaVento()
     {
         Instantiate(bolaVentoPrefab, bolaVentoPoint.position, bolaVentoPoint.rotation);
     }
-    
-    public void LaunchBolaFogo()
-        {
-            Instantiate(bolaFogoPrefab, bolaFogoPoint.position, bolaFogoPoint.rotation);
-        }
 
-    private void Atacar() 
+    public void LaunchBolaFogo()
+    {
+        Instantiate(bolaFogoPrefab, bolaFogoPoint.position, bolaFogoPoint.rotation);
+    }
+
+    private void Atacar()
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-           isAttacking = true;
-           anim.SetInteger("transition", 2); // Inicia a animação
-           StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
+            isAttacking = true;
+            anim.SetInteger("transition", 2); // Inicia a animação
+            StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            if(currentScene.buildIndex < 3)
+            if (currentScene.buildIndex < 3)
             {
                 return;
             }
-            
-           isAttacking = true;
-           anim.SetInteger("transition", 3); // Inicia a animação
-           StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
+
+            isAttacking = true;
+            anim.SetInteger("transition", 3); // Inicia a animação
+            StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
-            if(currentScene.buildIndex < 4)
+            if (currentScene.buildIndex < 4)
             {
                 return;
             }
-            
-           isAttacking = true;
-           anim.SetInteger("transition", 4); // Inicia a animação
-           StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
+
+            isAttacking = true;
+            anim.SetInteger("transition", 4); // Inicia a animação
+            StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            if(currentScene.buildIndex < 5)
+            if (currentScene.buildIndex < 5)
             {
                 return;
             }
-            
-          isAttacking = true;
-          anim.SetInteger("transition", 5); // Inicia a animação
-          StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
+
+            isAttacking = true;
+            anim.SetInteger("transition", 5); // Inicia a animação
+            StartCoroutine(ResetIsAttacking()); // Reseta após o tempo necessário
         }
     }
-    
+
     public void ApplyKnockback(Vector2 force)
     {
         if (isKnockedBack) return; // Evita múltiplos knockbacks
-    
+
         isKnockedBack = true;
         rb.velocity = Vector2.zero; // Reseta qualquer movimento atual
         rb.AddForce(force, ForceMode2D.Impulse); // Aplica a força de knockback
-    
+
         Invoke(nameof(ResetKnockback), knockbackDuration); // Reseta o knockback após a duração
     }
-    
+
     private void ResetKnockback()
     {
         isKnockedBack = false;
     }
-    
-    void OnTriggerStay2D(Collider2D other){
-        if(other.gameObject.CompareTag("Particulas"))
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Particulas"))
         {
             Debug.Log("TA AQ");
             withParticle = true;
@@ -319,12 +321,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D other){
-        if(other.gameObject.CompareTag("Particulas"))
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Particulas"))
         {
-            Debug.Log("saiu");
+            Debug.Log("ta saindo");
             withParticle = false;
-            dialogueObj.SetActive(false);
         }
     }
+    
 }

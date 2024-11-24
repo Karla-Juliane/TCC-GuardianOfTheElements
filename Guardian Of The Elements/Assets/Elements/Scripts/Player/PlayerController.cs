@@ -187,20 +187,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag("Platform"))
         {
-            isGrounded = false;
-            anim.SetBool("isGrounded", isGrounded);
-
-            // Quando o jogador sair da plataforma, ele não segue mais o movimento da plataforma
-            if (collision.gameObject.CompareTag("Platform"))
+            if (collision.gameObject.activeInHierarchy) // Verifica se a plataforma está ativa
             {
                 transform.SetParent(null);
             }
         }
     }
+
 
 
     private void novaPosicao()

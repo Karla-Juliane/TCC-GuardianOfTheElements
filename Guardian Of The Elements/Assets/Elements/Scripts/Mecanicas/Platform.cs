@@ -5,84 +5,94 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     public float moveSpeed;
-    public bool platform1, platform2;
-    public bool moveRight = true, moveUp = true;
+    public bool useTransform;
+    public bool shouldFlip;
 
-    private Vector2 movementDirection;
+    [SerializeField] private Vector2 movePosition;
+    [SerializeField] private Transform moveDestination;
+
+    private Vector2 initialPosition;
+    private Vector2 moveTarget;
+    private bool isReturning;
+
+    private float originalLocalScaleX;
+
+    void Start()
+    {
+        if (shouldFlip) originalLocalScaleX = transform.localScale.x;
+
+        if (useTransform)
+        {
+            moveTarget = moveDestination.position; // Usar a posição mundial do Transform
+        }
+        else
+        {
+            moveTarget = initialPosition + movePosition;
+        }
+
+        initialPosition = transform.position;
+    }
 
     void Update()
     {
-        // Movimento horizontal
-        if (platform1)
+        MovePlatform();
+    }
+
+    private void MovePlatform()
+    {
+        // Determina o destino atual (avançando ou voltando)
+        Vector2 targetPosition = isReturning ? initialPosition : moveTarget;
+
+        // Calcula o passo de movimento para este quadro
+        float step = moveSpeed * Time.deltaTime;
+
+        // Move a plataforma diretamente para o destino com limite
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, step);
+
+        // Verifica se a plataforma chegou ao destino
+        if (Vector2.Distance(transform.position, targetPosition) <= 0.01f)
         {
-            if (transform.position.x > 306.55f)
-            {
-                moveRight = false;
-            }
-            else if (transform.position.x < 296.74f)
-            {
-                moveRight = true;
-            }
+            isReturning = !isReturning; // Inverte o movimento
 
-            if (moveRight)
+            // Controla o flip, se necessário
+            if (shouldFlip)
             {
-                transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
-                movementDirection = Vector2.right * moveSpeed;  // Direção do movimento
-            }
-            else
-            {
-                transform.Translate(Vector2.right * -moveSpeed * Time.deltaTime);
-                movementDirection = Vector2.left * moveSpeed;  // Direção do movimento
-            }
-        }
-
-        // Movimento vertical
-        if (platform2)
-        {
-            if (transform.position.y > 3)
-            {
-                moveUp = false;
-            }
-            else if (transform.position.y < -1.64f)
-            {
-                moveUp = true;
-            }
-
-            if (moveUp)
-            {
-                transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
-                movementDirection = Vector2.up * moveSpeed;  // Direção do movimento
-            }
-            else
-            {
-                transform.Translate(Vector2.up * -moveSpeed * Time.deltaTime);
-                movementDirection = Vector2.down * moveSpeed;  // Direção do movimento
+                transform.localScale = new Vector3(
+                    isReturning ? -originalLocalScaleX : originalLocalScaleX,
+                    transform.localScale.y,
+                    transform.localScale.z);
             }
         }
     }
 
-    // Função para pegar a direção do movimento da plataforma
-    public Vector2 GetMovementDirection()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        return movementDirection;
-    }
-
-    // Detectar o jogador em cima da plataforma
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            // Torna o jogador filho da plataforma para segui-la
-            collision.transform.SetParent(transform);
+            other.transform.SetParent(transform);
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            // Quando o jogador sai da plataforma, ele deixa de segui-la
-            collision.transform.SetParent(null);
+            // Verifica se o objeto atual ainda está ativo antes de alterar o parent
+            if (gameObject.activeInHierarchy)
+            {
+                other.transform.SetParent(null);
+            }
         }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        // Desenha as linhas de movimento no editor para depuração
+        Vector3 destination = useTransform && moveDestination != null
+            ? moveDestination.position
+            : (Vector3)(initialPosition + movePosition);
+
+        Debug.DrawLine(transform.position, destination, Color.green);
     }
 }

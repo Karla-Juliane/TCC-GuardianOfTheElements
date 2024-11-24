@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate()
     {
-        if (player.position.x >= -20 && player.position.x < 345)
+        if (player.position.x >= -48.4 && player.position.x < 803.4)
         {
             // Calcula a posição da câmera com o offset de altura
             float targetY = player.position.y + heightOffset;

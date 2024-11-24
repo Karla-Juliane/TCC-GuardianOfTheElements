@@ -18,16 +18,14 @@ public class PlayerController : MonoBehaviour
     private Scene currentScene;
     
     public Slider healthSlider;  // Referência ao Slider da vida
-    public int life = 100;       // Vida do jogador
-    public int maxHealth = 100;  // Vida máxima do jogador
+    public int life = 10;       // Vida do jogador
+    public int maxHealth = 10;  // Vida máxima do jogador
     public TextMeshProUGUI textLife;  // Referência para o texto da vida
 
     public float speed;
     public int addJumps;
     public bool isGrounded;
     public float jumpForce;
-    public int life;
-    public TextMeshProUGUI textLife;
     public string levelName;
 
     public Animator anim;
@@ -71,7 +69,7 @@ public class PlayerController : MonoBehaviour
     {
         novaPosicao();
         moveX = Input.GetAxisRaw("Horizontal");
-        textLife.text = life.ToString();
+        
         Atacar();
 
         Move();

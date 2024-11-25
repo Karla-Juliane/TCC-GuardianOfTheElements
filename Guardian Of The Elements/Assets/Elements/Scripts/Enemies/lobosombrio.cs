@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Elements.Scripts.Player;
 using UnityEngine;
 
 public class lobosombrio : MonoBehaviour

@@ -8,13 +8,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    
+
     public GameObject pauseObj;
     public GameObject gameOverObj;
-    
+
     private string nomeFase;
 
     private bool isPaused;
+
     private void Awake()
     {
         instance = this;
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
     public void CarregarDepoisDe(string nome, float tempo)
     {
         nomeFase = nome;
-        Invoke(nameof(CarregarCena),tempo);
+        Invoke(nameof(CarregarCena), tempo);
     }
 
     public void CarregarCena()
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameOverObj.SetActive(true);
-        //Time.timeScale = 0f;
+        //Time.timeScale = 1f;
         Debug.Log("Game Over ativado!");
     }
 
@@ -68,3 +69,4 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(currentScene.buildIndex);
     }
 }
+    

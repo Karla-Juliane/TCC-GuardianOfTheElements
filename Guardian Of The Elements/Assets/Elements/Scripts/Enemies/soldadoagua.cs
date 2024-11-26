@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class soldadoagua : MonoBehaviour
 { 
-    
-     public GameObject balaProjetil; // Prefab da bala
+    public GameObject balaProjetil; // Prefab da bala
     public Transform arma; // Posição da arma para spawn da bala
     public float forcaDoTiro = 5f; // Velocidade da bala
     public float attackRange = 5f; // Distância para começar a atacar
@@ -16,8 +15,10 @@ public class soldadoagua : MonoBehaviour
     public int life; // Vida do inimigo
     public bool isDead; // Verifica se o inimigo morreu
     public float walkTime = 2f; // Tempo para trocar de direção
+    public float attackCooldown = 3f; // Intervalo entre ataques
 
     private bool isAttacking = false; // Se o inimigo está atacando
+    private bool canAttack = true; // Controle para o intervalo de ataque
     private bool walkRight = true; // Controla a direção do inimigo
     private float timer; // Timer para controlar a troca de direção
     private Rigidbody2D rb; // Rigidbody do inimigo
@@ -38,9 +39,9 @@ public class soldadoagua : MonoBehaviour
 
         // Verificar a distância entre o inimigo e o jogador
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distanceToPlayer <= attackRange && !isAttacking) // Se o jogador estiver dentro do alcance de ataque
+        if (distanceToPlayer <= attackRange && canAttack) // Se o jogador estiver dentro do alcance e pode atacar
         {
-            Attack(); // Inicia o ataque (tiro)
+            Attack();
         }
 
         // Movimentação do inimigo
@@ -72,6 +73,7 @@ public class soldadoagua : MonoBehaviour
         if (!isAttacking)
         {
             isAttacking = true;
+            canAttack = false; // Bloqueia ataques até que o cooldown termine
             anim.SetBool("isAttacking", true); // Inicia a animação de ataque
             rb.velocity = Vector2.zero; // Parar a movimentação durante o ataque
 
@@ -80,8 +82,11 @@ public class soldadoagua : MonoBehaviour
             // Atirar durante o ataque
             Atirar();
 
-            // Reseta o ataque após a animação (ajuste o tempo conforme necessário)
+            // Reseta o ataque após a animação
             Invoke("StopAttack", 1f);
+
+            // Reativa a possibilidade de atacar após o cooldown
+            Invoke("ResetAttackCooldown", attackCooldown);
         }
     }
 
@@ -92,18 +97,22 @@ public class soldadoagua : MonoBehaviour
         Debug.Log("Ataque finalizado!");
     }
 
+    private void ResetAttackCooldown()
+    {
+        canAttack = true;
+        Debug.Log("Cooldown de ataque finalizado. Pronto para atacar novamente.");
+    }
+
     private void Atirar()
     {
         // Criar o projétil
         GameObject temp = Instantiate(balaProjetil, arma.position, arma.rotation);
 
-        // Configurar a direção da bala baseada na rotação do inimigo
-        Rigidbody2D rbBala = temp.GetComponent<Rigidbody2D>();
-        if (rbBala != null)
+        // Configurar a bala para seguir o jogador
+        Bala balaScript = temp.GetComponent<Bala>();
+        if (balaScript != null)
         {
-            // A direção depende do lado que o inimigo está olhando
-            Vector2 direcao = transform.eulerAngles.y == 0 ? Vector2.right : Vector2.left;
-            rbBala.velocity = direcao * forcaDoTiro;
+            balaScript.SetTarget(player);
         }
 
         // Destruir o projétil após 3 segundos

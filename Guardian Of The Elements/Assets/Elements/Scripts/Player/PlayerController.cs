@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -196,6 +197,11 @@ namespace Elements.Scripts.Player
                     transform.SetParent(null);
                 }
             }
+
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                isGrounded = false;
+            }
         }
 
 
@@ -227,7 +233,7 @@ namespace Elements.Scripts.Player
             }
 
             // Se o jogador colidir com a bala
-            if (col.gameObject.CompareTag("Bullet"))
+            if (col.gameObject.CompareTag("bala"))
             {
                 Demage(1); // Aplica 1 de dano (ou o dano configurado na bala)
                 Destroy(col.gameObject); // Destrói a bala após a colisão
@@ -340,7 +346,6 @@ namespace Elements.Scripts.Player
         {
             if (other.gameObject.CompareTag("Particulas"))
             {
-                Debug.Log("TA AQ");
                 withParticle = true;
                 dialogueObj.SetActive(true);
             }
@@ -350,7 +355,6 @@ namespace Elements.Scripts.Player
         {
             if (other.gameObject.CompareTag("Particulas"))
             {
-                Debug.Log("ta saindo");
                 withParticle = false;
             }
         }

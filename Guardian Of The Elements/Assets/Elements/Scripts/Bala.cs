@@ -3,30 +3,55 @@ using UnityEngine;
 
 public class Bala : MonoBehaviour
 {
-    
     public int damage = 1; // Dano da bala
+    public float speed = 5f; // Velocidade da bala
+    public float followDuration = 3f; // Tempo que a bala segue o jogador
+    private Transform target; // Alvo para seguir
+    private Rigidbody2D rb; // Referência ao Rigidbody2D
+    private bool isFollowing = false; // Indica se está seguindo o jogador
 
-    // Função chamada quando a bala colide com algo
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void SetTarget(Transform player)
+    {
+        target = player;
+        isFollowing = true;
+        Invoke(nameof(StopFollowing), followDuration); // Para de seguir após followDuration
+    }
+
+    void Update()
+    {
+        if (isFollowing && target != null)
+        {
+            // Calcula a direção para o jogador
+            Vector2 direction = (target.position - transform.position).normalized;
+            rb.velocity = direction * speed;
+        }
+    }
+
+    private void StopFollowing()
+    {
+        isFollowing = false;
+        rb.velocity = Vector2.zero; // Para o movimento
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
-        // Verifica se a bala atingiu o jogador
         if (col.gameObject.CompareTag("Player"))
         {
-            // Aplica o dano ao jogador
             PlayerController player = col.GetComponent<PlayerController>();
             if (player != null)
             {
-                player.Demage(damage); // Chama o método de dano no jogador
-                Debug.Log("Bala atingiu o jogador!");
+                player.Demage(damage);
             }
-
-            // Destruir a bala após a colisão
             Destroy(gameObject);
         }
-        else if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("Wall"))
+        /*else if (col.gameObject.CompareTag("Wall"))
         {
-            // A bala colide com inimigos ou paredes e é destruída
             Destroy(gameObject);
-        }
+        }*/
     }
 }

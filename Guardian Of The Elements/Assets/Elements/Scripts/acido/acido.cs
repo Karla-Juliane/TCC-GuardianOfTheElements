@@ -18,6 +18,6 @@ public class acido : MonoBehaviour
             {
                 player.RestartLevel(SceneManager.GetActiveScene().name); // Aplica o dano ao jogador
             }
-         }
+        }
     }
 }

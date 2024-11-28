@@ -22,6 +22,7 @@ TagManager:
   - pendulo
   - Interactable
   - Particulas
+  - Cristal
   layers:
   - Default
   - TransparentFX

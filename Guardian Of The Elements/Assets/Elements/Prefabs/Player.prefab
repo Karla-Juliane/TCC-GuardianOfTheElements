@@ -105,7 +105,7 @@ GameObject:
   m_Layer: 0
   m_Name: Firepoint
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -118,8 +118,8 @@ Transform:
   m_GameObject: {fileID: 8198799958450085365}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.26, y: 1.34, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.07, y: 1.21, z: 0}
+  m_LocalScale: {x: 1.3686529, y: 1.3686529, z: 1.3686529}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2783751553672681159}
@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 7740114504200469046}
   - component: {fileID: 6728465021945634046}
   - component: {fileID: 7254882459513451905}
+  - component: {fileID: 3453468682203363747}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -210,7 +211,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 20.93367, y: 19.38}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -248,18 +249,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.6115413, y: 1.8297703}
+  m_Offset: {x: -0.6115413, y: 1.7603534}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.46}
     oldSize: {x: 11.44, y: 13.49}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 20.93367, y: 19.38}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.965049, y: 4.6595407}
+  m_Size: {x: 0.965049, y: 4.7983747}
   m_EdgeRadius: 0
 --- !u!50 &7740114504200469046
 Rigidbody2D:
@@ -300,18 +301,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae4b86d21a69b2438ea807b605539b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kbForce: 6
+  kbCount: 0
+  kbTime: 0.2
+  isKnockRight: 0
   healthSlider: {fileID: 0}
-  life: 5
+  life: 10
   maxHealth: 10
   textLife: {fileID: 0}
   speed: 8
   addJumps: 0
   isGrounded: 0
   jumpForce: 12
-  levelName: 1Terra
+  levelName: 2Agua
   anim: {fileID: 7254882459513451905}
-  bolaTerraPrefab: {fileID: 3267487030705265230, guid: 8c5ec1b56001e474585d24c7d49b2e98, type: 3}
-  bolaAguaPrefab: {fileID: 3267487030705265230, guid: 7050ee4a516dd004eb59988df0a6c2ac, type: 3}
+  bolaTerraPrefab: {fileID: 5265377788005272145, guid: 1d60c7d043736f74f89ca4f82076cfed, type: 3}
+  bolaAguaPrefab: {fileID: 5807357503187318824, guid: 6c5188376ce4594458bf1db9aee349c8, type: 3}
   bolaVentoPrefab: {fileID: 3267487030705265230, guid: 99e6f5429444fb0489385f4de6e624cb, type: 3}
   bolaFogoPrefab: {fileID: 3267487030705265230, guid: cc996bfc6ec749e4583271fb4fa24d0a, type: 3}
   withParticle: 0
@@ -342,3 +347,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3453468682203363747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8764894736288914115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5731322dfbe85d4691c932a2c2d01d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 0}

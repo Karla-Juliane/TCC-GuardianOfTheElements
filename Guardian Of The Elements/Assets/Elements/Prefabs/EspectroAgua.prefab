@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 717173041449294426}
   - component: {fileID: 8031067754418085280}
+  - component: {fileID: 7389117064470463802}
   - component: {fileID: 7747000978180319224}
   - component: {fileID: 7826691615046118560}
   - component: {fileID: 1560077203283497432}
-  - component: {fileID: 6921815629826110761}
   - component: {fileID: 8719125912058526523}
   m_Layer: 0
   m_Name: EspectroAgua
@@ -30,9 +30,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5633844313938582528}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -15, y: -0.7, z: 0.06508396}
-  m_LocalScale: {x: 0.52018225, y: 0.52018225, z: 0.52018225}
+  m_LocalScale: {x: 0.5684539, y: 0.5684539, z: 0.5684539}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -89,6 +89,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7389117064470463802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5633844313938582528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f31bd840af76a4695f7f76273932cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  chaseSpeed: 3
+  life: 3
+  isDead: 0
+  detectionRange: 12
+  player: {fileID: 0}
+  walkTime: 2
 --- !u!95 &7747000978180319224
 Animator:
   serializedVersion: 5
@@ -169,28 +188,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.6374106, y: -0.9783077}
+  m_Offset: {x: 0.65584517, y: -0.9783078}
   serializedVersion: 2
-  m_Radius: 1.04566
---- !u!114 &6921815629826110761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5633844313938582528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d9eff28d33ded74ba1ca1c54e3ed6ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  chaseSpeed: 3
-  life: 3
-  isDead: 0
-  detectionRange: 10
-  player: {fileID: 0}
-  walkTime: 0
+  m_Radius: 0.7505346
 --- !u!61 &8719125912058526523
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -223,10 +223,10 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.6822093, y: 0.038095474}
+  m_Offset: {x: 0.48983645, y: 0.038095474}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.48}
+    pivot: {x: 0.6, y: 0.46}
     oldSize: {x: 16.19, y: 15.61}
     newSize: {x: 16.19, y: 15.61}
     adaptiveTilingThreshold: 0.5
@@ -234,5 +234,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.4783778, y: 4.335475}
+  m_Size: {x: 1.9724472, y: 4.335475}
   m_EdgeRadius: 0

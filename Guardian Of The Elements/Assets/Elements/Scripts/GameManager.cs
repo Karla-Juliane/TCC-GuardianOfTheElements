@@ -82,4 +82,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void PularCena()
+    {
+        SceneManager.LoadScene(2);
+    }
 }

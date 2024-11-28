@@ -16,8 +16,11 @@ public class CutsceneTextController : MonoBehaviour
     private int indexFrase = 0; // Índice da frase atual
     public string nomeCenaProxima = "NomeDaProximaCena"; // Nome da cena a carregar
 
+    public Button botaoPular; // Referência ao botão de pular
+    
     private void Start()
     {
+
         // Define o fundo inicial, se houver
         if (fundos.Length > 0)
         {

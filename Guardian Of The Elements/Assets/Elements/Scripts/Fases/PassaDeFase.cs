@@ -19,7 +19,10 @@ public class PassaDeFase : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            int sceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            PlayerPrefs.SetInt("CompletedLevel", sceneIndex);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("Map");
         }
     }
 }

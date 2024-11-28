@@ -125,16 +125,6 @@ public class boss : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            PlayerController player = col.GetComponent<PlayerController>();
-            if (player != null)
-            {
-                Vector2 knockbackDirection = (col.transform.position - transform.position).normalized;
-                float knockbackForce = 20f; // Ajuste conforme necessário
-                Vector2 knockback = knockbackDirection * knockbackForce;
-                
-                player.ApplyKnockback(knockback);
-                Debug.Log("Knockback aplicado ao jogador!");
-            }
         }
         
         // Verifica colisões com poderes do jogador

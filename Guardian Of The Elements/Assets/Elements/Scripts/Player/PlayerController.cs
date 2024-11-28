@@ -9,6 +9,12 @@ namespace Elements.Scripts.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        public float kbForce;
+        public float kbCount;
+        public float kbTime;
+
+        public bool isKnockRight;
+        
         private bool porta;
         private GameObject novaPorta;
 
@@ -46,7 +52,7 @@ namespace Elements.Scripts.Player
         public Transform bolaFogoPoint;
 
         private bool isKnockedBack = false; // Controla se o jogador está em knockback
-        private float knockbackDuration = 0.5f; // Duração do knockback
+        private float knockbackDuration = 1f; // Duração do knockback
 
         private Transform currentPlatform; // A plataforma atual que o jogador está em
         private Vector2 platformVelocity; // A velocidade da plataforma
@@ -72,9 +78,7 @@ namespace Elements.Scripts.Player
             moveX = Input.GetAxisRaw("Horizontal");
         
             Atacar();
-
-            Move();
-
+            
             if (isGrounded == true)
             {
                 addJumps = 1;
@@ -106,6 +110,7 @@ namespace Elements.Scripts.Player
 
         void FixedUpdate()
         {
+            KnockLogic();
             // Se o jogador estiver sobre uma plataforma
             if (isOnPlatform)
             {
@@ -328,13 +333,19 @@ namespace Elements.Scripts.Player
 
         public void ApplyKnockback(Vector2 force)
         {
-            if (isKnockedBack) return; // Evita múltiplos knockbacks
+            return;
+            /*if (isKnockedBack)
+            {
+                return;
+            }; // Evita múltiplos knockbacks
 
             isKnockedBack = true;
             rb.velocity = Vector2.zero; // Reseta qualquer movimento atual
             rb.AddForce(force, ForceMode2D.Impulse); // Aplica a força de knockback
+            
+            Debug.Log("Knockback aplicado ao jogador!");
 
-            Invoke(nameof(ResetKnockback), knockbackDuration); // Reseta o knockback após a duração
+            Invoke(nameof(ResetKnockback), knockbackDuration); // Reseta o knockback após a duração*/
         }
 
         private void ResetKnockback()
@@ -357,6 +368,27 @@ namespace Elements.Scripts.Player
             {
                 withParticle = false;
             }
+        }
+
+        void KnockLogic()
+        {
+            if (kbCount < 0)
+            {
+                Move();
+            }
+            else
+            {
+                if (isKnockRight == true)
+                {
+                    rb.velocity = new Vector2(-kbForce * 100, rb.velocity.y);
+                }
+                if (isKnockRight == false)
+                {
+                    rb.velocity = new Vector2(kbForce * 100, rb.velocity.y);
+                }
+            }
+
+            kbCount -= Time.deltaTime;
         }
     }
 }

@@ -15,8 +15,10 @@ public class LevelManager : MonoBehaviour
     {
         for (int i = 0; i < buttons.Length; i++)
         {
+            Debug.Log("CompletedLevel: ");
+            Debug.Log(PlayerPrefs.GetInt("CompletedLevel"));
             // Verifica se a fase está bloqueada
-            if (i + 4 > PlayerPrefs.GetInt("CompletedLevel"))
+            if (i > PlayerPrefs.GetInt("CompletedLevel"))
             {
                 buttons[i].interactable = false; // Desativa o botão
                 cadeados[i].sprite = cadeadoFechado; // Mostra cadeado fechado

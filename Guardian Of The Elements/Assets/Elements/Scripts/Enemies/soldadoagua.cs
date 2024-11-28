@@ -24,14 +24,12 @@ public class soldadoagua : MonoBehaviour
     private Rigidbody2D rb; // Rigidbody do inimigo
     private BoxCollider2D colliderEnemy; // Collider do inimigo
     private Animator anim; // Referência ao Animator
-    private SpriteRenderer spriteRenderer; // Componente SpriteRenderer
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         colliderEnemy = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Acessando o SpriteRenderer
         isDead = false;
     }
 
@@ -117,33 +115,16 @@ public class soldadoagua : MonoBehaviour
             balaScript.SetTarget(player);
         }
 
-        // Destruir o projétil após 3 segundos
-        Destroy(temp, 3f);
+        // Destruir o projétil após 5 segundos
+        Destroy(temp, 5f);
     }
 
     public void Demage(int damage)
     {
         life -= damage;
-
-        // Mudar a cor do inimigo para vermelho quando ele receber dano
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = Color.red;
-            Invoke("ResetColor", 0.2f); // Voltar à cor original após 0.2 segundos
-        }
-
         if (life <= 0)
         {
             Death();
-        }
-    }
-
-    private void ResetColor()
-    {
-        // Retorna à cor original após o dano
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = Color.white;
         }
     }
 
@@ -180,5 +161,5 @@ public class soldadoagua : MonoBehaviour
         rb.gravityScale = 0;
         Destroy(gameObject, 1f);
     }
+    
 }
-

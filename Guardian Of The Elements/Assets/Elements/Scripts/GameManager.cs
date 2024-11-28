@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    public int score = 0;
+    public int totalScore = 0;
+    public Text scoreText;
     public GameObject pauseObj;
     public GameObject gameOverObj;
 
@@ -25,7 +28,14 @@ public class GameManager : MonoBehaviour
     {
         PauseGame();
     }
+    public void UpdateScore(int value)
+    {
+        Debug.Log("Chegou aqui");
+        score += value;
+        scoreText.text = score.ToString();
 
+        PlayerPrefs.SetInt("score", score + totalScore);
+    }
     public void CarregarDepoisDe(string nome, float tempo)
     {
         nomeFase = nome;
@@ -73,4 +83,3 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 }
-    

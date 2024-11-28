@@ -25,7 +25,7 @@ namespace Elements.Scripts.Player
         private Scene currentScene;
     
         public Slider healthSlider;  // Referência ao Slider da vida
-        public int life = 10;       // Vida do jogador
+        public int life = 10;       // Vida do jogado
         public int maxHealth = 10;  // Vida máxima do jogador
         public TextMeshProUGUI textLife;  // Referência para o texto da vida
 

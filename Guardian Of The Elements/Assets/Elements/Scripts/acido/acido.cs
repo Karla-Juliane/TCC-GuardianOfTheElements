@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class acido : MonoBehaviour
 {
-    public int damage = 2; // Quantidade de dano causada pelo ácido
+    public int damage = 5; // Quantidade de dano causada pelo ácido
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -16,7 +16,7 @@ public class acido : MonoBehaviour
           
             if (player != null)
             {
-                player.RestartLevel(SceneManager.GetActiveScene().name); // Aplica o dano ao jogador
+                player.Demage(damage); // Aplica o dano ao jogador
             }
         }
     }

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class CutsceneTextController : MonoBehaviour
 {
     public TextMeshProUGUI texto; // Referência ao componente TextMeshProUGUI
-    public float tempoPorLetra = 0.05f; // Tempo entre cada letra
+    public float tempoPorLetra = 0.01f; // Tempo entre cada letra
     public string[] frases; // Array de frases que aparecerão na cutscene
 
     public Image fundoCutscene; // Referência à imagem de fundo no Canvas
@@ -20,7 +20,7 @@ public class CutsceneTextController : MonoBehaviour
     
     private void Start()
     {
-
+        Time.timeScale = 1;
         // Define o fundo inicial, se houver
         if (fundos.Length > 0)
         {
@@ -33,12 +33,16 @@ public class CutsceneTextController : MonoBehaviour
 
     IEnumerator ExibirTexto(string frase)
     {
-        texto.text = ""; // Limpar texto antes de começar a exibir a frase
+        texto.text = "";
 
         foreach (char letra in frase)
         {
             texto.text += letra; // Adiciona a próxima letra à frase exibida
-            yield return new WaitForSeconds(tempoPorLetra); // Aguarda o tempo antes de mostrar a próxima letra
+            float start = Time.time;
+            while (Time.time < start + tempoPorLetra)
+            {
+                yield return null; // Espera até o tempo passar
+            }
         }
 
         yield return new WaitForSeconds(0.2f); // Tempo reduzido entre frases

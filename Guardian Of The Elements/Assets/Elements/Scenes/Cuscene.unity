@@ -891,8 +891,6 @@ MonoBehaviour:
     Merlin, o guardi\xE3o dos segredos de Naturia"
   - "Juntos, eles embarcar\xE3o em uma jornada para desvendar o mist\xE9rio de seus
     poderes e enfrentar a escurid\xE3o que amea\xE7a engolir o mundo."
-  - "Mestre Merlin: \"O destino escolheu voc\xEA, Greta. Agora, cabe a voc\xEA decidir:
-    fugir ou lutar pelo equil\xEDbrio de Naturia.\""
   fundoCutscene: {fileID: 473120041}
   fundos:
   - {fileID: 21300000, guid: 2eaa1ed1c2a42864fafba266e520400a, type: 3}

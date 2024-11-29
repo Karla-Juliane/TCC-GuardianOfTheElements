@@ -22,9 +22,9 @@ public class AtaqueTerra : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D colision)
     {
-        if(colision.gameObject.tag == "Enemy")
+        if(colision.gameObject.tag == "Enemie")
         {
-            colision.gameObject.GetComponent<Enemy>().Death();
+            //colision.gameObject.GetComponent<Enemy>().Death();
             Destroy(gameObject);
         }
     }

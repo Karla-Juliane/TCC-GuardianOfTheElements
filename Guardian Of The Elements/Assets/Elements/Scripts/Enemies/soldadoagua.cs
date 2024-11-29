@@ -133,14 +133,15 @@ public class soldadoagua : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             PlayerController player = col.GetComponent<PlayerController>();
-            if (player != null)
-            {
-                Vector2 knockbackDirection = (col.transform.position - transform.position).normalized;
-                float knockbackForce = 10f;
-                Vector2 knockback = knockbackDirection * knockbackForce;
 
-                player.ApplyKnockback(knockback);
-                Debug.Log("Knockback aplicado ao jogador!");
+            player.kbCount = player.kbTime;
+            if (col.transform.position.x <= transform.position.x)
+            {
+                player.isKnockRight = true;
+            }
+            if (col.transform.position.x > transform.position.x)
+            {
+                player.isKnockRight = false;
             }
         }
 

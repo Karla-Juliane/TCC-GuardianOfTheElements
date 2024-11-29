@@ -125,6 +125,16 @@ public class boss : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            PlayerController player = col.gameObject.GetComponent<PlayerController>();
+            player.kbCount = player.kbTime;
+            if (col.transform.position.x <= transform.position.x)
+            {
+                player.isKnockRight = true;
+            }
+            if (col.transform.position.x > transform.position.x)
+            {
+                player.isKnockRight = false;
+            }
         }
         
         // Verifica colisões com poderes do jogador

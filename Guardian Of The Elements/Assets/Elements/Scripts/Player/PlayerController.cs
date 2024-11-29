@@ -75,7 +75,6 @@ namespace Elements.Scripts.Player
         void Update()
         {
             novaPosicao();
-            moveX = Input.GetAxisRaw("Horizontal");
         
             Atacar();
             
@@ -110,43 +109,42 @@ namespace Elements.Scripts.Player
 
         void FixedUpdate()
         {
-            KnockLogic();
-            // Se o jogador estiver sobre uma plataforma
+            moveX = Input.GetAxisRaw("Horizontal");
+            
+            KnockLogic(); // Apenas processa knockback se estiver ativo
+        
             if (isOnPlatform)
             {
-                // Obtém a velocidade da plataforma
                 platformVelocity = currentPlatform.GetComponent<Rigidbody2D>().velocity;
-
-                // Aplica o movimento horizontal do jogador + a velocidade da plataforma
                 rb.velocity = new Vector2(moveX * speed + platformVelocity.x, rb.velocity.y);
-            }
-            else
-            {
-                // Se não estiver sobre uma plataforma, o jogador se move normalmente
-                rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
             }
         }
 
         void Move()
         {
-            if (isKnockedBack) return; // Ignora a movimentação durante o knockback
-
+            if (isKnockedBack)
+            {
+                return;
+            }; // Ignora a movimentação durante o knockback
+            
+            rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
+            
             // Se o jogador está se movendo para a direita
             if (moveX > 0)
             {
                 transform.eulerAngles = new Vector3(0f, 0f, 0f);
-                anim.SetInteger("transition", 1);;
+                anim.SetInteger("transition", 1);
             }
             // Se o jogador está se movendo para a esquerda
             else if (moveX < 0)
             {
                 transform.eulerAngles = new Vector3(0f, 180f, 0f);
-                anim.SetInteger("transition", 1);;
+                anim.SetInteger("transition", 1);
             }
             // Se o jogador não está se movendo
             else if (isGrounded && !isAttacking)
             {
-                anim.SetInteger("transition", 0);; // Para a animação de corrida
+                anim.SetInteger("transition", 0); // Para a animação de corrida
             }
         }
 
@@ -372,23 +370,20 @@ namespace Elements.Scripts.Player
 
         void KnockLogic()
         {
-            if (kbCount < 0)
+            if (kbCount > 0)
             {
-                Move();
+                // Aplica o knockback
+                float knockbackDirection = isKnockRight ? -1 : 1;
+                rb.velocity = new Vector2(knockbackDirection * kbForce, rb.velocity.y);
+
+                kbCount -= Time.deltaTime;
             }
             else
             {
-                if (isKnockRight == true)
-                {
-                    rb.velocity = new Vector2(-kbForce * 100, rb.velocity.y);
-                }
-                if (isKnockRight == false)
-                {
-                    rb.velocity = new Vector2(kbForce * 100, rb.velocity.y);
-                }
+                Debug.Log("Fora do if do kbCOunt");
+                kbCount = 0; // Garante que não fique negativo
+                Move(); // Retoma a movimentação
             }
-
-            kbCount -= Time.deltaTime;
         }
     }
 }

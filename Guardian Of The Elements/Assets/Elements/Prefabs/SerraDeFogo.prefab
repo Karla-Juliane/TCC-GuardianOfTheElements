@@ -28,13 +28,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383423957969290986}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 164.24, y: -2.06, z: 0}
-  m_LocalScale: {x: 3.6976972, y: 3.6400602, z: 1.555179}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.22076625, y: 0.20905761, z: 0}
+  m_LocalScale: {x: 0.46968, y: 0.46967998, z: 0.46967998}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6889766186309003784}
-  - {fileID: 647140630488496377}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3143712244413145897
@@ -79,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 5a3e34bdf5c49f04a827c2bce8dd121c, type: 3}
-  m_Color: {r: 1, g: 0.22822624, b: 0, a: 1}
+  m_Color: {r: 0.04150939, g: 0.038454924, b: 0.038454924, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355937d2b69f3f343b10beb46c1100e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pontoEsquerdo: {fileID: 8586659123897440947}
-  pontoDireito: {fileID: 5264976625621772813}
+  pontoEsquerdo: {fileID: 0}
+  pontoDireito: {fileID: 0}
   speed: 2
 --- !u!50 &8738996849976119487
 Rigidbody2D:
@@ -166,65 +164,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.02}
   serializedVersion: 2
   m_Radius: 0.18
---- !u!1 &5264976625621772813
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6889766186309003784}
-  m_Layer: 0
-  m_Name: PontoDireito
-  m_TagString: Untagged
-  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6889766186309003784
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5264976625621772813}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.082, y: 0.061, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6434095985985987075}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8586659123897440947
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 647140630488496377}
-  m_Layer: 0
-  m_Name: PontoEsquerdo
-  m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &647140630488496377
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8586659123897440947}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.973, y: 0.057, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6434095985985987075}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

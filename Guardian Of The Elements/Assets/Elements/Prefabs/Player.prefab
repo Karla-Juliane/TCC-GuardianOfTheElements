@@ -303,7 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kbForce: 6
   kbCount: 0
-  kbTime: 0.2
+  kbTime: 0.5
   isKnockRight: 0
   healthSlider: {fileID: 0}
   life: 10

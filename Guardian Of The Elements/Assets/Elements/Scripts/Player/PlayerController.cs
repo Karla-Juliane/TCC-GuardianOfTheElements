@@ -288,6 +288,11 @@ namespace Elements.Scripts.Player
 
         private void Atacar()
         {
+            if (isAttacking)
+            {
+                return;
+            }
+            
             if (Input.GetKeyDown(KeyCode.V))
             {
                 isAttacking = true;
